@@ -15,6 +15,7 @@ export interface ExperienceItem {
   href?: string
   period: string
   location?: string
+  team?: string // team / department within the company
 }
 
 export interface EducationItem {
@@ -41,6 +42,11 @@ export interface InterestItem {
   icon: IconName
 }
 
+export interface InterestGroup {
+  category: string
+  items: InterestItem[]
+}
+
 export interface Resume {
   name: string
   title: string
@@ -50,7 +56,7 @@ export interface Resume {
   experience: ExperienceItem[]
   education: EducationItem[]
   awards?: AwardItem[]
-  interests?: InterestItem[]
+  interests?: InterestGroup[]
   projects?: ProjectItem[]
 }
 
@@ -62,6 +68,7 @@ export const resume: Resume = {
   // Shown as icons. `label` becomes the accessible label + hover tooltip.
   // Delete any you don't use; fill in the TODO handles.
   contacts: [
+    { label: 'Email', href: 'mailto:x941i6c04@gmail.com', icon: 'email' },
     { label: 'GitHub', href: 'https://github.com/chronolai', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chronolai/', icon: 'linkedin' },
     { label: 'X (Twitter)', href: 'https://x.com/x941i6c04', icon: 'x', hidden: true },
@@ -77,12 +84,14 @@ export const resume: Resume = {
       company: 'CyCraft Technology',
       href: 'https://cycraft.com',
       period: '2018/10 – Present',
+      team: 'Frontend Team',
     },
     {
       role: 'Product Developer',
       company: 'Synology Inc.',
       href: 'https://www.synology.com',
       period: '2014/10 – 2018/09',
+      team: 'SD2 WAT',
     },
   ],
   education: [
@@ -99,38 +108,50 @@ export const resume: Resume = {
       degree: 'B.S. in Computer Science and Information Engineering',
       school: 'National Taipei University of Technology',
       period: '2008 – 2012',
+      lab: {
+        name: 'Embedded and Parallel Systems Lab',
+      },
     },
   ],
-  // Hidden for now — uncomment to show the Awards section again.
-  // awards: [
-  //   { year: '2012', title: '國立台北科技大學電資學院第六屆金手獎第一名' },
-  //   {
-  //     year: '2012',
-  //     title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名',
-  //   },
-  //   { year: '2011', title: '臺北科技大學資訊工程系實務專題競賽特優' },
-  //   {
-  //     year: '2011',
-  //     title: '台灣駭客年會 War Game 第十一名',
-  //     href: 'https://hitcon.org/2011/wargame/score_board.html',
-  //   },
-  //   { year: '2009', title: '臺北科技大學通識競賽魔術方塊大賽第一名' },
-  //   { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術第二名' },
-  //   { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術北區第一名' },
-  //   { year: '2006', title: '台北市程式設計開放組第三名' },
-  // ],
-  interests: [
-    { label: 'Puzzle', icon: 'puzzle' },
-    { label: 'Badminton', icon: 'badminton' },
-    { label: 'Darts', icon: 'darts' },
-    { label: 'Pokémon', icon: 'pokemon' },
+  awards: [
+    { year: '2012/04', title: '國立台北科技大學電資學院第六屆金手獎第一名' },
+    {
+      year: '2012/04',
+      title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名',
+    },
+    { year: '2011/10', title: '臺北科技大學資訊工程系實務專題競賽特優' },
+    {
+      year: '2011',
+      title: '台灣駭客年會 War Game 第十一名',
+      href: 'https://hitcon.org/2011/wargame/score_board.html',
+    },
+    { year: '2009', title: '臺北科技大學通識競賽魔術方塊大賽第一名' },
+    { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術第二名' },
+    { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術北區第一名' },
+    { year: '2006', title: '台北市程式設計開放組第三名' },
   ],
-  // Hidden for now — uncomment to show the Projects section again.
-  // projects: [
-  //   {
-  //     name: 'TODO: Project name',
-  //     description: 'TODO: One line about what it does.',
-  //     href: 'https://github.com/chronolai',
-  //   },
-  // ],
+  interests: [
+    {
+      category: 'Interests',
+      items: [
+        { label: 'Puzzle', icon: 'puzzle' },
+        { label: 'Badminton', icon: 'badminton' },
+        { label: 'Darts', icon: 'darts' },
+      ],
+    },
+    {
+      category: 'Favorites',
+      items: [
+        { label: 'Cat', icon: 'cat' },
+        { label: 'Pokémon', icon: 'pokemon' },
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: 'TODO: Project name',
+      description: 'TODO: One line about what it does.',
+      href: 'https://github.com/chronolai',
+    },
+  ],
 }

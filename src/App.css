@@ -181,6 +181,10 @@
   align-items: flex-start;
 }
 
+.entry--dated .entry-meta {
+  text-align: right;
+}
+
 .entry-title {
   font-weight: 600;
   font-size: 1.05rem;
@@ -261,7 +265,48 @@
   color: var(--resume-muted);
 }
 
+/* Contacts (CV only) — reuses the .entry--dated date-rail layout so the icons
+   line up with the date column and the values with the content column. */
+.contact-list {
+  gap: 0.55rem;
+}
+
+.contact-list .entry-meta svg {
+  margin-left: 0.4rem;
+  vertical-align: -0.15em;
+  color: var(--resume-accent);
+}
+
+.contact-value {
+  color: var(--resume-muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-value:hover,
+.contact-value:focus-visible {
+  color: var(--resume-accent);
+  text-decoration: underline;
+}
+
 /* Interests */
+.interest-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 2.25rem);
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.interest-sections > .resume-section {
+  margin-top: 0;
+}
+
+@media (max-width: 560px) {
+  .interest-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
 .interest-list {
   list-style: none;
   margin: 0;
@@ -294,6 +339,9 @@
   .entry--dated {
     grid-template-columns: 1fr;
     row-gap: 0.15rem;
+  }
+  .entry--dated .entry-meta {
+    text-align: left;
   }
   .entry-meta {
     white-space: normal;

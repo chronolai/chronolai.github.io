@@ -1,9 +1,15 @@
+import { Head } from 'vite-react-ssg'
 import './App.css'
 import { resume } from './data/resume'
 import { Icon } from './components/icons'
 import { ThemeToggle } from './components/ThemeToggle'
 
-function App() {
+// Display text for a contact href: full URL for the web, bare address for email.
+function contactValue(href: string) {
+  return href.startsWith('mailto:') ? href.slice('mailto:'.length) : href
+}
+
+function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
   const {
     name,
     title,
@@ -17,8 +23,13 @@ function App() {
     projects,
   } = resume
 
+  const isCv = variant === 'cv'
+
   return (
     <div className="resume">
+      <Head>
+        <title>{isCv ? 'Chrono Lai — CV' : 'Chrono Lai — Resume'}</title>
+      </Head>
       <div className="resume-topbar">
         <ThemeToggle />
       </div>
@@ -62,17 +73,28 @@ function App() {
       </header>
 
       {interests && interests.length > 0 && (
-        <section className="resume-section" aria-labelledby="interests-heading">
-          <h2 id="interests-heading">Interests</h2>
-          <ul className="interest-list">
-            {interests.map((it) => (
-              <li key={it.label} className="interest">
-                <Icon name={it.icon} />
-                <span>{it.label}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className="interest-sections">
+          {interests.map((group) => {
+            const headingId = `${group.category.toLowerCase()}-heading`
+            return (
+              <section
+                key={group.category}
+                className="resume-section"
+                aria-labelledby={headingId}
+              >
+                <h2 id={headingId}>{group.category}</h2>
+                <ul className="interest-list">
+                  {group.items.map((it) => (
+                    <li key={it.label} className="interest">
+                      <Icon name={it.icon} />
+                      <span>{it.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          })}
+        </div>
       )}
 
       {experience.length > 0 && (
@@ -102,6 +124,7 @@ function App() {
                       </a>
                     ) : null}
                   </div>
+                  {e.team ? <div className="entry-lab">{e.team}</div> : null}
                 </div>
               </li>
             ))}
@@ -143,7 +166,7 @@ function App() {
         </section>
       )}
 
-      {awards && awards.length > 0 && (
+      {isCv && awards && awards.length > 0 && (
         <section className="resume-section" aria-labelledby="awards-heading">
           <h2 id="awards-heading">Awards</h2>
           <ul className="entry-list">
@@ -173,7 +196,36 @@ function App() {
         </section>
       )}
 
-      {projects && projects.length > 0 && (
+      {isCv && contacts.length > 0 && (
+        <section className="resume-section" aria-labelledby="contacts-heading">
+          <h2 id="contacts-heading">Contacts</h2>
+          <ul className="entry-list contact-list">
+            {contacts.map((c) => {
+              const isExternal = c.href.startsWith('http')
+              return (
+                <li key={c.href} className="entry entry--dated">
+                  <span className="entry-meta">
+                    {c.label}
+                    <Icon name={c.icon} size={16} />
+                  </span>
+                  <div className="entry-content">
+                    <a
+                      className="contact-value"
+                      href={c.href}
+                      aria-label={c.label}
+                      {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    >
+                      {contactValue(c.href)}
+                    </a>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      )}
+
+      {isCv && projects && projects.length > 0 && (
         <section className="resume-section" aria-labelledby="projects-heading">
           <h2 id="projects-heading">Projects</h2>
           <ul className="entry-list">
