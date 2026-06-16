@@ -19,6 +19,7 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
     experience,
     education,
     awards,
+    certifications,
     interests,
     projects,
   } = resume
@@ -189,6 +190,22 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                       </a>
                     ) : null}
                   </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {isCv && certifications && certifications.length > 0 && (
+        <section className="resume-section" aria-labelledby="certifications-heading">
+          <h2 id="certifications-heading">Certifications</h2>
+          <ul className="entry-list">
+            {certifications.map((c, i) => (
+              <li key={`${c.title}-${i}`} className="entry entry--dated">
+                <span className="entry-meta">{c.date}</span>
+                <div className="entry-content">
+                  <span className="entry-title">{c.title}</span>
                 </div>
               </li>
             ))}

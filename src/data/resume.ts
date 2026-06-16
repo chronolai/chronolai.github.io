@@ -37,6 +37,11 @@ export interface AwardItem {
   href?: string
 }
 
+export interface CertificationItem {
+  date: string // YYYY/MM
+  title: string
+}
+
 export interface InterestItem {
   label: string
   icon: IconName
@@ -56,6 +61,7 @@ export interface Resume {
   experience: ExperienceItem[]
   education: EducationItem[]
   awards?: AwardItem[]
+  certifications?: CertificationItem[]
   interests?: InterestGroup[]
   projects?: ProjectItem[]
 }
@@ -129,6 +135,13 @@ export const resume: Resume = {
     { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術第二名' },
     { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術北區第一名' },
     { year: '2006', title: '台北市程式設計開放組第三名' },
+  ],
+  certifications: [
+    { date: '2008/06', title: '單晶片能力認證丙級' },
+    { date: '2007/11', title: '乙級電腦硬體裝修' },
+    { date: '2007/07', title: '丙級電腦硬體裝修' },
+    { date: '2007/03', title: '丙級網頁設計' },
+    { date: '2006/07', title: '丙級電腦軟體應用' },
   ],
   interests: [
     {
