@@ -355,6 +355,7 @@
   border-top: 1px solid var(--resume-border);
   font-size: 0.8rem;
   color: var(--resume-muted);
+  text-align: right;
 }
 
 /* Print / save-to-PDF */
