@@ -248,6 +248,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
           </ul>
         </section>
       )}
+
+      <footer className="resume-footer">Last Update: {__RESUME_UPDATED__}</footer>
     </div>
   )
 }
