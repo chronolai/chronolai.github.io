@@ -1,21 +1,328 @@
-.hello {
-  min-height: 100dvh;
+:root {
+  --resume-max-width: 760px;
+  --resume-accent: #ea580c;
+  --resume-muted: #6b7280;
+  --resume-border: #e5e7eb;
+  --resume-tag-bg: #f3f4f6;
+  --resume-tag-fg: #374151;
+}
+
+:root[data-theme='dark'] {
+  --resume-accent: #fb923c;
+  --resume-muted: #9ca3af;
+  --resume-border: #2e303a;
+  --resume-tag-bg: #23252e;
+  --resume-tag-fg: #d1d5db;
+}
+
+.resume {
+  max-width: var(--resume-max-width);
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
+  text-align: left;
+}
+
+/* Header */
+.resume-header {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.resume-topbar {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 0.25rem;
+}
+
+.resume-identity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 3vw, 1.25rem);
+  min-width: 0;
+}
+
+.resume-headings {
+  min-width: 0;
+}
+
+.resume-avatar {
+  flex: 0 0 auto;
+  width: clamp(64px, 18vw, 96px);
+  height: clamp(64px, 18vw, 96px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--resume-border);
+}
+
+.resume-header h1 {
+  font-size: clamp(1.9rem, 6vw, 2.75rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -0.4rem -0.5rem 0 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--resume-muted);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--resume-tag-bg);
+  color: var(--resume-accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--resume-accent);
+  outline-offset: 2px;
+}
+
+.resume-title {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  margin: 0.35rem 0 0;
+  color: var(--resume-muted);
+}
+
+.resume-location {
+  color: var(--resume-muted);
+}
+
+.resume-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto; /* push icons to the right of the name/title block */
+}
+
+.resume-contacts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: var(--resume-muted);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.resume-contacts a:hover,
+.resume-contacts a:focus-visible {
+  background: var(--resume-tag-bg);
+  color: var(--resume-accent);
+}
+
+.resume-contacts a:focus-visible {
+  outline: 2px solid var(--resume-accent);
+  outline-offset: 2px;
+}
+
+/* Sections */
+.resume-section {
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.resume-section > h2 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--resume-muted);
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--resume-border);
+}
+
+.resume-section p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* Entries (experience / education / projects) */
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.15rem 1rem;
+}
+
+/* Dated entries: fixed-width date rail on the left, content on the right. */
+.entry--dated {
+  display: grid;
+  grid-template-columns: var(--entry-date-col, 8rem) 1fr;
+  column-gap: 1.25rem;
+  align-items: baseline;
+}
+
+.entry-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.entry-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.entry-org {
+  font-weight: 600;
+  color: var(--resume-accent);
+}
+
+.entry-meta {
+  color: var(--resume-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.entry-title a {
+  color: var(--resume-accent);
+  text-decoration: none;
+}
+
+.entry-title a:hover,
+.entry-title a:focus-visible {
+  text-decoration: underline;
+}
+
+.entry-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+  color: var(--resume-muted);
+  text-decoration: none;
+}
+
+.entry-link:hover,
+.entry-link:focus-visible {
+  color: var(--resume-accent);
+  text-decoration: none;
+}
+
+/* Win over the `.entry-title a` accent/underline rule for the icon link. */
+.entry-title .entry-link {
+  color: var(--resume-muted);
+}
+
+.entry-title .entry-link:hover,
+.entry-title .entry-link:focus-visible {
+  color: var(--resume-accent);
+}
+
+.entry-highlights {
+  margin: 0.55rem 0 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.entry-highlights li {
+  line-height: 1.6;
+}
+
+.entry-subtitle {
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+}
+
+.entry-desc {
+  margin-top: 0.35rem !important;
+  color: var(--resume-muted);
+}
+
+.entry-lab {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  color: var(--resume-muted);
+}
+
+/* Interests */
+.interest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.interest {
+  display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
-  text-align: center;
-  padding: 2rem;
+  background: var(--resume-tag-bg);
+  color: var(--resume-tag-fg);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
 }
 
-.hello h1 {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  margin: 0;
+.interest svg {
+  color: var(--resume-accent);
 }
 
-.hello p {
-  margin: 0;
-  color: #888;
-  font-size: 1.125rem;
+/* Narrow screens: stack the period under the title */
+@media (max-width: 480px) {
+  .entry-head {
+    flex-direction: column;
+  }
+  .entry--dated {
+    grid-template-columns: 1fr;
+    row-gap: 0.15rem;
+  }
+  .entry-meta {
+    white-space: normal;
+  }
+}
+
+/* Print / save-to-PDF */
+@media print {
+  :root {
+    --resume-accent: #1a1a1a;
+    --resume-muted: #444;
+    --resume-border: #ccc;
+    --resume-tag-bg: transparent;
+    --resume-tag-fg: #1a1a1a;
+  }
+  .resume {
+    max-width: none;
+    padding: 0;
+    color: #000;
+  }
+  .theme-toggle {
+    display: none;
+  }
+  .resume-contacts a {
+    width: auto;
+    height: auto;
+    color: #000;
+  }
+  .skill-tag {
+    border: 1px solid #999;
+  }
 }

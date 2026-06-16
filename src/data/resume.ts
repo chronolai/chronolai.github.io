@@ -1,0 +1,136 @@
+// Single source of truth for the resume.
+// Edit this file to update the site — the page renders entirely from `resume`.
+import type { IconName } from '../components/icons'
+
+export interface ContactLink {
+  label: string // used as accessible label / tooltip; the UI shows the icon only
+  href: string
+  icon: IconName
+  hidden?: boolean // keep the data but don't render the icon
+}
+
+export interface ExperienceItem {
+  role: string
+  company: string
+  href?: string
+  period: string
+  location?: string
+}
+
+export interface EducationItem {
+  degree: string
+  school: string
+  period: string
+  lab?: { name: string; href?: string } // research lab / advisor group
+}
+
+export interface ProjectItem {
+  name: string
+  description: string
+  href?: string
+}
+
+export interface AwardItem {
+  year: string
+  title: string
+  href?: string
+}
+
+export interface InterestItem {
+  label: string
+  icon: IconName
+}
+
+export interface Resume {
+  name: string
+  title: string
+  location?: string
+  gravatarHash?: string // SHA-256 (or MD5) hash of your email, from gravatar.com
+  contacts: ContactLink[]
+  experience: ExperienceItem[]
+  education: EducationItem[]
+  awards?: AwardItem[]
+  interests?: InterestItem[]
+  projects?: ProjectItem[]
+}
+
+export const resume: Resume = {
+  name: 'Chrono Lai',
+  title: 'Software Engineer',
+  location: 'Taiwan',
+  gravatarHash: 'c0ffc65eca47c9d9315d2b91fc54bf98888d98587a09957047afe3e3d672d24b',
+  // Shown as icons. `label` becomes the accessible label + hover tooltip.
+  // Delete any you don't use; fill in the TODO handles.
+  contacts: [
+    { label: 'GitHub', href: 'https://github.com/chronolai', icon: 'github' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chronolai/', icon: 'linkedin' },
+    { label: 'X (Twitter)', href: 'https://x.com/x941i6c04', icon: 'x', hidden: true },
+    { label: 'Instagram', href: 'https://www.instagram.com/chronolai/', icon: 'instagram', hidden: true },
+    { label: 'Facebook', href: 'https://www.facebook.com/x941i6c04', icon: 'facebook', hidden: true },
+    { label: 'Threads', href: 'https://www.threads.com/@chronolai', icon: 'threads', hidden: true },
+    { label: 'Plurk', href: 'https://www.plurk.com/x941i6c04', icon: 'plurk', hidden: true },
+    { label: 'YouTube', href: 'https://www.youtube.com/@x941i6c04', icon: 'youtube', hidden: true },
+  ],
+  experience: [
+    {
+      role: 'Senior Software Engineer',
+      company: 'CyCraft Technology',
+      href: 'https://cycraft.com',
+      period: '2018/10 – Present',
+    },
+    {
+      role: 'Product Developer',
+      company: 'Synology Inc.',
+      href: 'https://www.synology.com',
+      period: '2014/10 – 2018/09',
+    },
+  ],
+  education: [
+    {
+      degree: 'M.S. in Computer Science and Information Engineering',
+      school: 'National Taipei University of Technology',
+      period: '2012 – 2014',
+      lab: {
+        name: 'Intelligent System Lab',
+        href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
+      },
+    },
+    {
+      degree: 'B.S. in Computer Science and Information Engineering',
+      school: 'National Taipei University of Technology',
+      period: '2008 – 2012',
+    },
+  ],
+  // Hidden for now — uncomment to show the Awards section again.
+  // awards: [
+  //   { year: '2012', title: '國立台北科技大學電資學院第六屆金手獎第一名' },
+  //   {
+  //     year: '2012',
+  //     title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名',
+  //   },
+  //   { year: '2011', title: '臺北科技大學資訊工程系實務專題競賽特優' },
+  //   {
+  //     year: '2011',
+  //     title: '台灣駭客年會 War Game 第十一名',
+  //     href: 'https://hitcon.org/2011/wargame/score_board.html',
+  //   },
+  //   { year: '2009', title: '臺北科技大學通識競賽魔術方塊大賽第一名' },
+  //   { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術第二名' },
+  //   { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術北區第一名' },
+  //   { year: '2006', title: '台北市程式設計開放組第三名' },
+  // ],
+  interests: [
+    { label: 'Puzzle', icon: 'puzzle' },
+    { label: 'Badminton', icon: 'badminton' },
+    { label: 'Darts', icon: 'darts' },
+    { label: 'Pokémon', icon: 'pokemon' },
+  ],
+  // Hidden for now — uncomment to show the Projects section again.
+  // projects: [
+  //   {
+  //     name: 'TODO: Project name',
+  //     description: 'TODO: One line about what it does.',
+  //     href: 'https://github.com/chronolai',
+  //   },
+  // ],
+}
