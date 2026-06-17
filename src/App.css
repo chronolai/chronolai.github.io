@@ -144,6 +144,11 @@
   border-bottom: 1px solid var(--resume-border);
 }
 
+/* Offset so anchor-jumped headings aren't flush against the viewport top. */
+.section-heading {
+  scroll-margin-top: clamp(1rem, 4vw, 2rem);
+}
+
 /* Markdown-style heading permalink: hidden until the heading is hovered/focused. */
 .heading-anchor {
   margin-left: 0.4rem;
@@ -174,7 +179,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: .5rem;
 }
 
 .entry-head {

@@ -137,6 +137,7 @@ export const resume: Resume = {
           text: 'Video Station',
           href: 'https://www.synology.com/en-global/dsm/7.2/software_spec/video_station',
         },
+        { text: 'internal: UI Request System' },
         { text: 'tools: ExtExpress, SynoWeekly' },
       ],
     },
