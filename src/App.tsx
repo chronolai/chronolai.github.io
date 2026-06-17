@@ -181,7 +181,9 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
         <section className="resume-section" aria-labelledby="education">
           <SectionHeading id="education" title="Education" />
           <ul className="entry-list">
-            {education.map((e, i) => (
+            {education
+              .filter((e) => isCv || !e.cvOnly)
+              .map((e, i) => (
               <li key={`${e.school}-${i}`} className="entry entry--dated">
                 <span className="entry-meta">{e.period}</span>
                 <div className="entry-content">

@@ -28,9 +28,10 @@ export interface ExperienceItem {
 export interface EducationItem {
   degree: string
   school: string
-  period: string
+  period?: string
   lab?: { name: string; href?: string } // research lab / advisor group
   highlights?: Highlight[] // thesis / research topics
+  cvOnly?: boolean // hide on the concise home page; show only on /cv
 }
 
 export interface ProjectItem {
@@ -166,28 +167,60 @@ export const resume: Resume = {
         },
       ],
     },
+    {
+      degree: 'Dept. of Computer Science',
+      school: 'Taipei Municipal Songshan High School of Agriculture and Industry',
+      period: '2005 – 2008',
+      cvOnly: true,
+    },
+    {
+      degree: 'Junior High School',
+      school: 'Taipei Municipal Heping High School',
+      period: '2002 – 2005',
+      cvOnly: true,
+    },
+    {
+      degree: 'Elementary School',
+      school: 'Taipei Municipal Daan Elementary School',
+      period: '1996 – 2002',
+      cvOnly: true,
+    },
+    {
+      degree: 'Kindergarten',
+      school: '內政部警政署警察機械修理廠附設幼稚園',
+      period: '1995 – 1996',
+      cvOnly: true,
+    },
   ],
   awards: [
     { year: '2012/04', title: '國立台北科技大學電資學院第六屆金手獎第一名' },
-    {
-      year: '2012/04',
-      title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名',
-    },
+    { year: '2012/04', title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名' },
     { year: '2011/10', title: '臺北科技大學資訊工程系實務專題競賽特優' },
-    {
-      year: '2011/07',
-      title: '台灣駭客年會 War Game 第十一名',
-      href: 'https://hitcon.org/2011/wargame/score_board.html',
-    },
-    { year: '2009', title: '臺北科技大學通識競賽魔術方塊大賽第一名' },
-    { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術第二名' },
-    { year: '2007', title: '第 37 屆全國技能競賽資訊與網路技術北區第一名' },
-    { year: '2006', title: '台北市程式設計開放組第三名' },
+    { year: '2011/07', title: '台灣駭客年會 War Game 第十一名', href: 'https://hitcon.org/2011/wargame/score_board.html' },
+    { year: '2011', title: '臺北科技大學 通識競賽 魔術方塊大賽第三名' },
+    { year: '2010', title: '臺北科技大學 通識競賽 魔術方塊大賽第二名' },
+    { year: '2009', title: '臺北科技大學 通識競賽 魔術方塊大賽第一名' },
+    { year: '2008', title: '臺北市畢業生市長獎' },
+    { year: '2007/12', title: '96學年度工業類學生技藝競賽（電腦修護職種）：參賽證明' },
+    { year: '2007/10', title: '第37屆全國技能競賽（資訊與網路技術職類）：成績評定及格' },
+    { year: '2007/10', title: '第37屆全國技能競賽（資訊與網路技術職類）：第二名' },
+    { year: '2007/06', title: '第37屆全國技能競賽北區初賽（資訊與網路技術職類）：第一名' },
+    { year: '2007/05', title: '95學年度第 2 學期校內班級網頁競賽：第二名' },
+    { year: '2007/05', title: '95學年度高二班際大隊接力比賽：男子組第四名' },
+    { year: '2006/12', title: '臺北市 95 學年度高級中等學校學生電腦軟體設計競賽：開放組第 3 名' },
+    { year: '2006/10', title: '第36屆全國技能競賽（資訊與網路技術職類）：成績評定及格' },
+    { year: '2006/10', title: '第36屆全國技能競賽（資訊與網路技術職類）：第四名' },
+    { year: '2006/06', title: '94學年度第2學期高一大隊接力比賽：男子組第2名' },
+    { year: '2006/06', title: '九十四學年度第二學期校內班級網頁競賽：第二名' },
+    { year: '2006/06', title: '第三十六屆全國技能競賽北區初賽（資訊與網路技術職類）：第五名' },
+    { year: '2006/03', title: '94學年度第2學期高1班際桌球比賽：男子組第2名' },
+    { year: '2005/12', title: '94學年度無菸校園網頁設計比賽：第二名' },
   ],
   certifications: [
     { date: '2008/06', title: '單晶片能力認證丙級' },
     { date: '2007/11', title: '乙級電腦硬體裝修' },
     { date: '2007/07', title: '丙級電腦硬體裝修' },
+    { date: '2007/06', title: '96臺北市街頭藝人活動許可證' },
     { date: '2007/03', title: '丙級網頁設計' },
     { date: '2006/07', title: '丙級電腦軟體應用' },
   ],
