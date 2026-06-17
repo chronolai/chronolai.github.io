@@ -144,6 +144,24 @@
   border-bottom: 1px solid var(--resume-border);
 }
 
+/* Markdown-style heading permalink: hidden until the heading is hovered/focused. */
+.heading-anchor {
+  margin-left: 0.4rem;
+  color: var(--resume-muted);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.section-heading:hover .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.heading-anchor:hover {
+  color: var(--resume-accent);
+}
+
 .resume-section p {
   margin: 0;
   line-height: 1.65;
@@ -262,6 +280,11 @@
 .entry-lab {
   margin-top: 0.2rem;
   font-size: 0.9rem;
+  color: var(--resume-muted);
+}
+
+.talk-venue {
+  font-weight: 400;
   color: var(--resume-muted);
 }
 

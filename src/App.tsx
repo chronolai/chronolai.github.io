@@ -9,6 +9,45 @@ function contactValue(href: string) {
   return href.startsWith('mailto:') ? href.slice('mailto:'.length) : href
 }
 
+// CV-only bullet list under an experience/education entry; each item may carry a
+// trailing external-link icon (the link convention used across the site).
+function Highlights({ items }: { items: { text: string; href?: string }[] }) {
+  return (
+    <ul className="entry-highlights">
+      {items.map((h) => (
+        <li key={h.text}>
+          {h.text}
+          {h.href ? (
+            <a
+              className="entry-link"
+              href={h.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${h.text} — external link`}
+              title="Open link"
+            >
+              <Icon name="external-link" size={14} />
+            </a>
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// Section <h2> with a markdown-style permalink: a `#` that appears on hover and
+// links to the heading's own id.
+function SectionHeading({ id, title }: { id: string; title: string }) {
+  return (
+    <h2 id={id} className="section-heading">
+      {title}
+      <a className="heading-anchor" href={`#${id}`} aria-label={`Permalink to ${title}`}>
+        #
+      </a>
+    </h2>
+  )
+}
+
 function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
   const {
     name,
@@ -20,6 +59,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
     education,
     awards,
     certifications,
+    talks,
+    hackathons,
     interests,
     projects,
   } = resume
@@ -76,14 +117,14 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       {interests && interests.length > 0 && (
         <div className="interest-sections">
           {interests.map((group) => {
-            const headingId = `${group.category.toLowerCase()}-heading`
+            const headingId = group.category.toLowerCase()
             return (
               <section
                 key={group.category}
                 className="resume-section"
                 aria-labelledby={headingId}
               >
-                <h2 id={headingId}>{group.category}</h2>
+                <SectionHeading id={headingId} title={group.category} />
                 <ul className="interest-list">
                   {group.items.map((it) => (
                     <li key={it.label} className="interest">
@@ -99,8 +140,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       )}
 
       {experience.length > 0 && (
-        <section className="resume-section" aria-labelledby="experience-heading">
-          <h2 id="experience-heading">Experience</h2>
+        <section className="resume-section" aria-labelledby="experience">
+          <SectionHeading id="experience" title="Experience" />
           <ul className="entry-list">
             {experience.map((e, i) => (
               <li key={`${e.company}-${i}`} className="entry entry--dated">
@@ -126,6 +167,9 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                     ) : null}
                   </div>
                   {e.team ? <div className="entry-lab">{e.team}</div> : null}
+                  {e.highlights && e.highlights.length > 0 ? (
+                    <Highlights items={e.highlights} />
+                  ) : null}
                 </div>
               </li>
             ))}
@@ -134,8 +178,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       )}
 
       {education.length > 0 && (
-        <section className="resume-section" aria-labelledby="education-heading">
-          <h2 id="education-heading">Education</h2>
+        <section className="resume-section" aria-labelledby="education">
+          <SectionHeading id="education" title="Education" />
           <ul className="entry-list">
             {education.map((e, i) => (
               <li key={`${e.school}-${i}`} className="entry entry--dated">
@@ -160,6 +204,9 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                       ) : null}
                     </div>
                   ) : null}
+                  {e.highlights && e.highlights.length > 0 ? (
+                    <Highlights items={e.highlights} />
+                  ) : null}
                 </div>
               </li>
             ))}
@@ -168,8 +215,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       )}
 
       {isCv && awards && awards.length > 0 && (
-        <section className="resume-section" aria-labelledby="awards-heading">
-          <h2 id="awards-heading">Awards</h2>
+        <section className="resume-section" aria-labelledby="awards">
+          <SectionHeading id="awards" title="Awards" />
           <ul className="entry-list">
             {awards.map((a, i) => (
               <li key={`${a.title}-${i}`} className="entry entry--dated">
@@ -198,8 +245,8 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       )}
 
       {isCv && certifications && certifications.length > 0 && (
-        <section className="resume-section" aria-labelledby="certifications-heading">
-          <h2 id="certifications-heading">Certifications</h2>
+        <section className="resume-section" aria-labelledby="certifications">
+          <SectionHeading id="certifications" title="Certifications" />
           <ul className="entry-list">
             {certifications.map((c, i) => (
               <li key={`${c.title}-${i}`} className="entry entry--dated">
@@ -213,9 +260,69 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
         </section>
       )}
 
+      {isCv && talks && talks.length > 0 && (
+        <section className="resume-section" aria-labelledby="talks">
+          <SectionHeading id="talks" title="Talks" />
+          <ul className="entry-list">
+            {talks.map((t, i) => (
+              <li key={`${t.title}-${i}`} className="entry entry--dated">
+                <span className="entry-meta">{t.date}</span>
+                <div className="entry-content">
+                  <span className="entry-title">
+                    {t.title} <span className="talk-venue">@ {t.venue}</span>
+                    {t.href ? (
+                      <a
+                        className="entry-link"
+                        href={t.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${t.title} — external link`}
+                        title="View talk"
+                      >
+                        <Icon name="external-link" size={14} />
+                      </a>
+                    ) : null}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {isCv && hackathons && hackathons.length > 0 && (
+        <section className="resume-section" aria-labelledby="hackathons">
+          <SectionHeading id="hackathons" title="Hackathons" />
+          <ul className="entry-list">
+            {hackathons.map((h, i) => (
+              <li key={`${h.name}-${i}`} className="entry entry--dated">
+                <span className="entry-meta">{h.date}</span>
+                <div className="entry-content">
+                  <span className="entry-title">
+                    {h.name}
+                    {h.href ? (
+                      <a
+                        className="entry-link"
+                        href={h.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${h.name} — external link`}
+                        title="View details"
+                      >
+                        <Icon name="external-link" size={14} />
+                      </a>
+                    ) : null}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {isCv && contacts.length > 0 && (
-        <section className="resume-section" aria-labelledby="contacts-heading">
-          <h2 id="contacts-heading">Contacts</h2>
+        <section className="resume-section" aria-labelledby="contacts">
+          <SectionHeading id="contacts" title="Contacts" />
           <ul className="entry-list contact-list">
             {contacts.map((c) => {
               const isExternal = c.href.startsWith('http')
@@ -243,20 +350,26 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
       )}
 
       {isCv && projects && projects.length > 0 && (
-        <section className="resume-section" aria-labelledby="projects-heading">
-          <h2 id="projects-heading">Projects</h2>
+        <section className="resume-section" aria-labelledby="projects">
+          <SectionHeading id="projects" title="Projects" />
           <ul className="entry-list">
             {projects.map((p, i) => (
               <li key={`${p.name}-${i}`} className="entry">
                 <div className="entry-head">
                   <span className="entry-title">
+                    {p.name}
                     {p.href ? (
-                      <a href={p.href} target="_blank" rel="noreferrer">
-                        {p.name}
+                      <a
+                        className="entry-link"
+                        href={p.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${p.name} — external link`}
+                        title="View project"
+                      >
+                        <Icon name="external-link" size={14} />
                       </a>
-                    ) : (
-                      p.name
-                    )}
+                    ) : null}
                   </span>
                 </div>
                 <p className="entry-desc">{p.description}</p>

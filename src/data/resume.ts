@@ -9,6 +9,12 @@ export interface ContactLink {
   hidden?: boolean // keep the data but don't render the icon
 }
 
+// A bullet under an experience/education entry (shown on the CV only); optional link.
+export interface Highlight {
+  text: string
+  href?: string
+}
+
 export interface ExperienceItem {
   role: string
   company: string
@@ -16,6 +22,7 @@ export interface ExperienceItem {
   period: string
   location?: string
   team?: string // team / department within the company
+  highlights?: Highlight[]
 }
 
 export interface EducationItem {
@@ -23,6 +30,7 @@ export interface EducationItem {
   school: string
   period: string
   lab?: { name: string; href?: string } // research lab / advisor group
+  highlights?: Highlight[] // thesis / research topics
 }
 
 export interface ProjectItem {
@@ -40,6 +48,19 @@ export interface AwardItem {
 export interface CertificationItem {
   date: string // YYYY/MM
   title: string
+}
+
+export interface TalkItem {
+  title: string
+  venue: string
+  date?: string // YYYY/MM/DD
+  href?: string
+}
+
+export interface HackathonItem {
+  name: string
+  date: string
+  href?: string
 }
 
 export interface InterestItem {
@@ -62,6 +83,8 @@ export interface Resume {
   education: EducationItem[]
   awards?: AwardItem[]
   certifications?: CertificationItem[]
+  talks?: TalkItem[]
+  hackathons?: HackathonItem[]
   interests?: InterestGroup[]
   projects?: ProjectItem[]
 }
@@ -91,6 +114,13 @@ export const resume: Resume = {
       href: 'https://cycraft.com',
       period: '2018/10 – Present',
       team: 'Frontend Team',
+      highlights: [
+        { text: 'XCockpit (MDR/IASM/EASM)', href: 'https://www.cycraft.com/xcockpit' },
+        { text: 'CyberTotal', href: 'https://www.cycraft.com/cybertotal' },
+        { text: 'ThreatWall', href: 'https://www.cycraft.com/threatwall' },
+        { text: 'UI Framework 2.0 — shared component library' },
+        { text: 'Internal: Official Site, Leave System, Employee Check-in Bot' },
+      ],
     },
     {
       role: 'Product Developer',
@@ -98,6 +128,17 @@ export const resume: Resume = {
       href: 'https://www.synology.com',
       period: '2014/10 – 2018/09',
       team: 'SD2 WAT',
+      highlights: [
+        {
+          text: 'Synology Moments',
+          href: 'https://www.synology.com/en-global/dsm/feature/moments',
+        },
+        {
+          text: 'Video Station',
+          href: 'https://www.synology.com/en-global/dsm/7.2/software_spec/video_station',
+        },
+        { text: 'tools: ExtExpress, SynoWeekly' },
+      ],
     },
   ],
   education: [
@@ -109,6 +150,7 @@ export const resume: Resume = {
         name: 'Intelligent System Lab',
         href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
       },
+      highlights: [{ text: 'The Study of Static Code Analysis' }],
     },
     {
       degree: 'B.S. in Computer Science and Information Engineering',
@@ -117,6 +159,11 @@ export const resume: Resume = {
       lab: {
         name: 'Embedded and Parallel Systems Lab',
       },
+      highlights: [
+        {
+          text: 'A Wireless Network-based Android Remote Control Car with Real-time Camera Video Supported',
+        },
+      ],
     },
   ],
   awards: [
@@ -127,7 +174,7 @@ export const resume: Resume = {
     },
     { year: '2011/10', title: '臺北科技大學資訊工程系實務專題競賽特優' },
     {
-      year: '2011',
+      year: '2011/07',
       title: '台灣駭客年會 War Game 第十一名',
       href: 'https://hitcon.org/2011/wargame/score_board.html',
     },
@@ -143,6 +190,21 @@ export const resume: Resume = {
     { date: '2007/03', title: '丙級網頁設計' },
     { date: '2006/07', title: '丙級電腦軟體應用' },
   ],
+  talks: [
+    {
+      title: 'Android Car',
+      venue: 'Taipei GTUG',
+      date: '2012/08/15',
+      href: 'https://gdg-taipei.kktix.cc/events/0aafc1',
+    },
+    {
+      title: '在 Fedora 上如何 20 秒破解魔術方塊',
+      venue: 'FTUG',
+      date: '2007/09/15',
+      href: 'https://groups.google.com/g/ftug/c/AImrxsdIXOc?hl=zh-TW',
+    },
+  ],
+  hackathons: [{ date: '2015', name: 'HackNTU' }],
   interests: [
     {
       category: 'Interests',
@@ -162,9 +224,29 @@ export const resume: Resume = {
   ],
   projects: [
     {
-      name: 'TODO: Project name',
-      description: 'TODO: One line about what it does.',
-      href: 'https://github.com/chronolai',
+      name: 'videojs-quality-selector',
+      description: 'Video.js plugin for source/quality selection.',
+      href: 'https://github.com/chronolai/videojs-qualityselector',
+    },
+    {
+      name: 'videojs-panorama',
+      description: 'Video.js plugin for 360° panorama video playback.',
+      href: 'https://github.com/chronolai/videojs-panorama',
+    },
+    {
+      name: 'DartsKeeper',
+      description: 'Darts scorekeeping app.',
+      href: 'https://github.com/chronolai/DartsKeeper',
+    },
+    {
+      name: 'cocomvc',
+      description: 'Lightweight PHP MVC framework.',
+      href: 'https://github.com/chronolai/cocomvc',
+    },
+    {
+      name: 'learn-jp',
+      description: 'Japanese learning tool.',
+      href: 'http://chronolai.github.io/learn-jp/',
     },
   ],
 }
