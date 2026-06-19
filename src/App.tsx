@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import './App.css'
 import { resume } from './data/resume'
@@ -7,6 +9,24 @@ import { ThemeToggle } from './components/ThemeToggle'
 // Display text for a contact href: full URL for the web, bare address for email.
 function contactValue(href: string) {
   return href.startsWith('mailto:') ? href.slice('mailto:'.length) : href
+}
+
+// Gold/silver/bronze class for 1st/2nd/3rd place. Parses the place number out of a
+// rank like 第一名 / 第二名 / 第 3 名 / 第2名 (Chinese or Arabic); 第十一名 etc. → none.
+function medalClass(rank?: string): string {
+  if (!rank) return ''
+  if (rank.includes('特優')) return 'award-rank--gold' // 特優 ≑ 1st place
+  const m = rank.match(/第\s*([0-9一二三十]+)\s*名/)
+  if (!m) return ''
+  const n = m[1].trim()
+  const place = /^\d+$/.test(n) ? Number(n) : n === '一' ? 1 : n === '二' ? 2 : n === '三' ? 3 : 0
+  return place === 1
+    ? 'award-rank--gold'
+    : place === 2
+      ? 'award-rank--silver'
+      : place === 3
+        ? 'award-rank--bronze'
+        : ''
 }
 
 // CV-only bullet list under an experience/education entry; each item may carry a
@@ -32,6 +52,27 @@ function Highlights({ items }: { items: { text: string; href?: string }[] }) {
         </li>
       ))}
     </ul>
+  )
+}
+
+// A community entry's label: name + optional trailing external-link icon.
+function CommunityName({ item }: { item: { name: string; href?: string } }) {
+  return (
+    <>
+      {item.name}
+      {item.href ? (
+        <a
+          className="entry-link"
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${item.name} — external link`}
+          title="Visit"
+        >
+          <Icon name="external-link" size={14} />
+        </a>
+      ) : null}
+    </>
   )
 }
 
@@ -61,14 +102,25 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
     certifications,
     talks,
     hackathons,
+    conferences,
+    community,
+    activities,
     interests,
     projects,
   } = resume
 
   const isCv = variant === 'cv'
 
+  // SPA reloads/direct loads: the browser tries to scroll to #hash before React has
+  // rendered the target, so re-scroll once after render (and on hash change).
+  const { hash } = useLocation()
+  useEffect(() => {
+    if (!hash) return
+    document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView()
+  }, [hash])
+
   return (
-    <div className="resume">
+    <div className={`resume${isCv ? ' resume--cv' : ''}`}>
       <Head>
         <title>{isCv ? 'Chrono Lai — CV' : 'Chrono Lai — Resume'}</title>
       </Head>
@@ -144,7 +196,10 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
           <SectionHeading id="experience" title="Experience" />
           <ul className="entry-list">
             {experience.map((e, i) => (
-              <li key={`${e.company}-${i}`} className="entry entry--dated">
+              <li
+                key={`${e.company}-${i}`}
+                className={`entry entry--dated${isCv ? ' entry--onresume' : ''}`}
+              >
                 <span className="entry-meta">
                   {e.period}
                   {e.location ? ` · ${e.location}` : ''}
@@ -184,7 +239,10 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
             {education
               .filter((e) => isCv || !e.cvOnly)
               .map((e, i) => (
-              <li key={`${e.school}-${i}`} className="entry entry--dated">
+              <li
+                key={`${e.school}-${i}`}
+                className={`entry entry--dated${isCv && !e.cvOnly ? ' entry--onresume' : ''}`}
+              >
                 <span className="entry-meta">{e.period}</span>
                 <div className="entry-content">
                   <span className="entry-title">{e.degree}</span>
@@ -225,7 +283,10 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                 <span className="entry-meta">{a.year}</span>
                 <div className="entry-content">
                   <span className="entry-title">
-                    {a.title}
+                    {a.rank ? (
+                      <span className={`award-rank ${medalClass(a.rank)}`.trim()}>{a.rank}</span>
+                    ) : null}
+                    <span className="award-name">{a.title}</span>
                     {a.href ? (
                       <a
                         className="entry-link"
@@ -262,6 +323,22 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
         </section>
       )}
 
+      {isCv && conferences && conferences.length > 0 && (
+        <section className="resume-section" aria-labelledby="conferences">
+          <SectionHeading id="conferences" title="Conferences" />
+          <ul className="entry-list">
+            {conferences.map((c) => (
+              <li key={c.year} className="entry entry--dated">
+                <span className="entry-meta">{c.year}</span>
+                <div className="entry-content">
+                  <span className="conf-names">{c.names.join(', ')}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {isCv && talks && talks.length > 0 && (
         <section className="resume-section" aria-labelledby="talks">
           <SectionHeading id="talks" title="Talks" />
@@ -284,6 +361,52 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                         <Icon name="external-link" size={14} />
                       </a>
                     ) : null}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {isCv && community && community.length > 0 && (
+        <section className="resume-section" aria-labelledby="community">
+          <SectionHeading id="community" title="Community" />
+          <ul className="entry-list">
+            {community.map((c) => (
+              <li key={c.name} className="entry entry--dated">
+                <span className="entry-meta">{c.year}</span>
+                <div className="entry-content">
+                  <span className="entry-title">
+                    <CommunityName item={c} />
+                  </span>
+                  {c.items && c.items.length > 0 ? (
+                    <ul className="community-children">
+                      {c.items.map((sub) => (
+                        <li key={sub.name}>
+                          {sub.year ? <span className="community-year">{sub.year}</span> : null}
+                          <CommunityName item={sub} />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {isCv && activities && activities.length > 0 && (
+        <section className="resume-section" aria-labelledby="activities">
+          <SectionHeading id="activities" title="Activities" />
+          <ul className="entry-list">
+            {activities.map((a, i) => (
+              <li key={`${a.role}-${i}`} className="entry entry--dated">
+                <span className="entry-meta">{a.period}</span>
+                <div className="entry-content">
+                  <span className="entry-title">
+                    {a.role} <span className="activity-org">· {a.org}</span>
                   </span>
                 </div>
               </li>

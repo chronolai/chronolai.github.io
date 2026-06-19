@@ -42,7 +42,8 @@ export interface ProjectItem {
 
 export interface AwardItem {
   year: string
-  title: string
+  title: string // award name (rank removed)
+  rank?: string // placement / result, shown before the name
   href?: string
 }
 
@@ -62,6 +63,24 @@ export interface HackathonItem {
   name: string
   date: string
   href?: string
+}
+
+export interface ConferenceItem {
+  year: string
+  names: string[] // conferences attended that year
+}
+
+export interface CommunityItem {
+  name: string
+  href?: string
+  year?: string
+  items?: CommunityItem[] // nested sub-activities
+}
+
+export interface ActivityItem {
+  period: string // e.g. '2006 – 2007'
+  role: string // e.g. '班長', '社長', '隊員'
+  org: string // class / club / team
 }
 
 export interface InterestItem {
@@ -86,6 +105,9 @@ export interface Resume {
   certifications?: CertificationItem[]
   talks?: TalkItem[]
   hackathons?: HackathonItem[]
+  conferences?: ConferenceItem[]
+  community?: CommunityItem[]
+  activities?: ActivityItem[]
   interests?: InterestGroup[]
   projects?: ProjectItem[]
 }
@@ -98,7 +120,7 @@ export const resume: Resume = {
   // Shown as icons. `label` becomes the accessible label + hover tooltip.
   // Delete any you don't use; fill in the TODO handles.
   contacts: [
-    { label: 'Email', href: 'mailto:x941i6c04@gmail.com', icon: 'email' },
+    { label: 'Email', href: 'mailto:x941i6c04[at]gmail.com', icon: 'email' },
     { label: 'GitHub', href: 'https://github.com/chronolai', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chronolai/', icon: 'linkedin' },
     { label: 'X (Twitter)', href: 'https://x.com/x941i6c04', icon: 'x', hidden: true },
@@ -110,13 +132,13 @@ export const resume: Resume = {
   ],
   experience: [
     {
-      role: 'Senior Software Engineer',
+      role: 'Senior Software Development Engineer',
       company: 'CyCraft Technology',
       href: 'https://cycraft.com',
       period: '2018/10 – Present',
-      team: 'Frontend Team',
+      team: 'Frontend Development Dept.',
       highlights: [
-        { text: 'XCockpit (MDR/IASM/EASM)', href: 'https://www.cycraft.com/xcockpit' },
+        { text: 'XCockpit (MDR / IASM / EASM)', href: 'https://www.cycraft.com/xcockpit' },
         { text: 'CyberTotal', href: 'https://www.cycraft.com/cybertotal' },
         { text: 'ThreatWall', href: 'https://www.cycraft.com/threatwall' },
         { text: 'UI Framework 2.0 — shared component library' },
@@ -193,34 +215,35 @@ export const resume: Resume = {
     },
   ],
   awards: [
-    { year: '2012/04', title: '國立台北科技大學電資學院第六屆金手獎第一名' },
-    { year: '2012/04', title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組第三名' },
-    { year: '2011/10', title: '臺北科技大學資訊工程系實務專題競賽特優' },
-    { year: '2011/07', title: '台灣駭客年會 War Game 第十一名', href: 'https://hitcon.org/2011/wargame/score_board.html' },
-    { year: '2011', title: '臺北科技大學 通識競賽 魔術方塊大賽第三名' },
-    { year: '2010', title: '臺北科技大學 通識競賽 魔術方塊大賽第二名' },
-    { year: '2009', title: '臺北科技大學 通識競賽 魔術方塊大賽第一名' },
+    { year: '2012/04', rank: '第一名', title: '國立台北科技大學電資學院第六屆金手獎' },
+    { year: '2012/04', rank: '第三名', title: '100 學年度大學校院網路通訊軟體與創意應用競賽嵌入式軟體組' },
+    { year: '2011/10', rank: '特優', title: '臺北科技大學資訊工程系實務專題競賽' },
+    { year: '2011/07', rank: '第十一名', title: '台灣駭客年會 War Game', href: 'https://hitcon.org/2011/wargame/score_board.html' },
+    { year: '2011', rank: '第三名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
+    { year: '2010', rank: '第二名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
+    { year: '2009', rank: '第一名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
     { year: '2008', title: '臺北市畢業生市長獎' },
-    { year: '2007/12', title: '96學年度工業類學生技藝競賽（電腦修護職種）：參賽證明' },
-    { year: '2007/10', title: '第37屆全國技能競賽（資訊與網路技術職類）：成績評定及格' },
-    { year: '2007/10', title: '第37屆全國技能競賽（資訊與網路技術職類）：第二名' },
-    { year: '2007/06', title: '第37屆全國技能競賽北區初賽（資訊與網路技術職類）：第一名' },
-    { year: '2007/05', title: '95學年度第 2 學期校內班級網頁競賽：第二名' },
-    { year: '2007/05', title: '95學年度高二班際大隊接力比賽：男子組第四名' },
-    { year: '2006/12', title: '臺北市 95 學年度高級中等學校學生電腦軟體設計競賽：開放組第 3 名' },
-    { year: '2006/10', title: '第36屆全國技能競賽（資訊與網路技術職類）：成績評定及格' },
-    { year: '2006/10', title: '第36屆全國技能競賽（資訊與網路技術職類）：第四名' },
-    { year: '2006/06', title: '94學年度第2學期高一大隊接力比賽：男子組第2名' },
-    { year: '2006/06', title: '九十四學年度第二學期校內班級網頁競賽：第二名' },
-    { year: '2006/06', title: '第三十六屆全國技能競賽北區初賽（資訊與網路技術職類）：第五名' },
-    { year: '2006/03', title: '94學年度第2學期高1班際桌球比賽：男子組第2名' },
-    { year: '2005/12', title: '94學年度無菸校園網頁設計比賽：第二名' },
+    { year: '2007/12', rank: '', title: '96學年度工業類學生技藝競賽（電腦修護職種）參賽證明' },
+    { year: '2007/10', rank: '', title: '第37屆全國技能競賽（資訊與網路技術職類）成績評定及格' },
+    { year: '2007/10', rank: '第二名', title: '第37屆全國技能競賽（資訊與網路技術職類）' },
+    { year: '2007/06', rank: '第一名', title: '第37屆全國技能競賽北區初賽（資訊與網路技術職類）' },
+    { year: '2007/05', rank: '第二名', title: '95學年度第 2 學期校內班級網頁競賽' },
+    { year: '2007/05', rank: '第四名', title: '95學年度高二班際大隊接力比賽 男子組' },
+    { year: '2007/04', rank: '第一名', title: '松山工農 益智遊戲社 校慶比賽' },
+    { year: '2006/12', rank: '第三名', title: '臺北市 95 學年度高級中等學校學生電腦軟體設計競賽 開放組' },
+    { year: '2006/10', rank: '', title: '第36屆全國技能競賽（資訊與網路技術職類）成績評定及格' },
+    { year: '2006/10', rank: '第四名', title: '第36屆全國技能競賽（資訊與網路技術職類）' },
+    { year: '2006/06', rank: '第二名', title: '94學年度第2學期高一大隊接力比賽 男子組' },
+    { year: '2006/06', rank: '第二名', title: '九十四學年度第二學期校內班級網頁競賽' },
+    { year: '2006/06', rank: '第五名', title: '第三十六屆全國技能競賽北區初賽（資訊與網路技術職類）' },
+    { year: '2006/03', rank: '第二名', title: '94學年度第2學期高1班際桌球比賽 男子組' },
+    { year: '2005/12', rank: '第二名', title: '94學年度無菸校園網頁設計比賽' },
   ],
   certifications: [
     { date: '2008/06', title: '單晶片能力認證丙級' },
     { date: '2007/11', title: '乙級電腦硬體裝修' },
     { date: '2007/07', title: '丙級電腦硬體裝修' },
-    { date: '2007/06', title: '96臺北市街頭藝人活動許可證' },
+    { date: '2007/06', title: '96-98臺北市街頭藝人活動許可證' },
     { date: '2007/03', title: '丙級網頁設計' },
     { date: '2006/07', title: '丙級電腦軟體應用' },
   ],
@@ -239,6 +262,39 @@ export const resume: Resume = {
     },
   ],
   hackathons: [{ date: '2015', name: 'HackNTU' }],
+  conferences: [
+    { year: '2026', names: ['DEVCORE CONFERENCE'] },
+    { year: '2025', names: ['CYBERSEC'] },
+    { year: '2023', names: ['HITCON'] },
+    { year: '2020', names: ['Synology Taipei'] },
+    { year: '2019', names: ['HITCON'] },
+    { year: '2018', names: ['HITCON', 'Modern Web', 'GDG DevFest Taipei', 'Synology Taipei'] },
+    { year: '2017', names: ['HITCON'] },
+    { year: '2016', names: ['HITCON', 'COSCUP'] },
+    { year: '2015', names: ['HITCON', 'COSCUP', 'JSDC'] },
+    { year: '2014', names: ['HITCON', 'COSCUP', 'OSDC'] },
+    { year: '2013', names: ['HITCON', 'COSCUP', 'JSDC', 'WebConf Taiwan', 'PyConf Taiwan', 'PHPConf'] },
+    { year: '2012', names: ['HITCON', 'COSCUP', 'OSDC'] },
+    { year: '2011', names: ['HITCON', 'COSCUP', 'OSDC'] },
+  ],
+  community: [
+    { year: '2015 – 2016', name: 'HITCON ZeroDay', href: 'https://zeroday.hitcon.org/', items:[{name: '後端開發人員'}] },
+    {
+      year: '2006 – ****',
+      name: 'PTT Rubiks',
+      href: 'https://www.ptt.cc/bbs/rubiks/index.html',
+      items: [
+        { year: '96', name: '全國魔術方塊大賽 – 裁判' },
+        { year: '96', name: '冬季魔術方塊大賽 – 裁判' },
+      ],
+    },
+  ],
+  // TODO: replace these placeholders with the real class/club/team roles.
+  activities: [
+    { period: 'TODO', role: '班級幹部 (TODO)', org: 'TODO' },
+    { period: 'TODO', role: '社團幹部 (TODO)', org: 'TODO' },
+    { period: 'TODO', role: '校隊 (TODO)', org: 'TODO' },
+  ],
   interests: [
     {
       category: 'Interests',
@@ -257,30 +313,5 @@ export const resume: Resume = {
     },
   ],
   projects: [
-    {
-      name: 'videojs-quality-selector',
-      description: 'Video.js plugin for source/quality selection.',
-      href: 'https://github.com/chronolai/videojs-qualityselector',
-    },
-    {
-      name: 'videojs-panorama',
-      description: 'Video.js plugin for 360° panorama video playback.',
-      href: 'https://github.com/chronolai/videojs-panorama',
-    },
-    {
-      name: 'DartsKeeper',
-      description: 'Darts scorekeeping app.',
-      href: 'https://github.com/chronolai/DartsKeeper',
-    },
-    {
-      name: 'cocomvc',
-      description: 'Lightweight PHP MVC framework.',
-      href: 'https://github.com/chronolai/cocomvc',
-    },
-    {
-      name: 'learn-jp',
-      description: 'Japanese learning tool.',
-      href: 'http://chronolai.github.io/learn-jp/',
-    },
   ],
 }

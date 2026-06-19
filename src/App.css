@@ -5,6 +5,9 @@
   --resume-border: #e5e7eb;
   --resume-tag-bg: #f3f4f6;
   --resume-tag-fg: #374151;
+  --medal-gold: #c8960a;
+  --medal-silver: #8a8f98;
+  --medal-bronze: #b06a2c;
 }
 
 :root[data-theme='dark'] {
@@ -13,6 +16,9 @@
   --resume-border: #2e303a;
   --resume-tag-bg: #23252e;
   --resume-tag-fg: #d1d5db;
+  --medal-gold: #e3b341;
+  --medal-silver: #b6bcc6;
+  --medal-bronze: #cd853f;
 }
 
 .resume {
@@ -190,10 +196,27 @@
   gap: 0.15rem 1rem;
 }
 
+/* On the CV, mark entries that also appear on the concise home page with a faint
+   left bar. Drawn as an absolutely-positioned ::before in the left gutter so it
+   takes no layout space and doesn't shift any entry's position. */
+.resume--cv .entry--onresume {
+  position: relative;
+}
+
+.resume--cv .entry--onresume::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.85rem;
+  width: 1px;
+  background: color-mix(in srgb, var(--resume-accent) 35%, transparent);
+}
+
 /* Dated entries: fixed-width date rail on the left, content on the right. */
 .entry--dated {
   display: grid;
-  grid-template-columns: var(--entry-date-col, 8rem) 1fr;
+  grid-template-columns: var(--entry-date-col, 10rem) 1fr;
   column-gap: 1.25rem;
   align-items: baseline;
 }
@@ -221,6 +244,7 @@
 .entry-meta {
   color: var(--resume-muted);
   font-size: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   white-space: nowrap;
 }
 
@@ -288,9 +312,44 @@
   color: var(--resume-muted);
 }
 
-.talk-venue {
+.talk-venue,
+.activity-org {
   font-weight: 400;
   color: var(--resume-muted);
+}
+
+/* Awards: rank as a pill before the award name (name stays normal weight). */
+.award-rank {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  vertical-align: 0.08em;
+  white-space: nowrap;
+  background: var(--resume-tag-bg);
+  color: var(--resume-tag-fg);
+}
+
+/* Gold / silver / bronze pills for 1st / 2nd / 3rd place. */
+.award-rank--gold {
+  background: color-mix(in srgb, var(--medal-gold) 20%, transparent);
+  color: var(--medal-gold);
+}
+
+.award-rank--silver {
+  background: color-mix(in srgb, var(--medal-silver) 24%, transparent);
+  color: var(--medal-silver);
+}
+
+.award-rank--bronze {
+  background: color-mix(in srgb, var(--medal-bronze) 20%, transparent);
+  color: var(--medal-bronze);
+}
+
+.award-name {
+  font-weight: 400;
 }
 
 /* Contacts (CV only) — reuses the .entry--dated date-rail layout so the icons
@@ -315,6 +374,36 @@
 .contact-value:focus-visible {
   color: var(--resume-accent);
   text-decoration: underline;
+}
+
+/* Conferences (CV only) — reuses the .entry--dated rail: year on the left,
+   that year's conferences on the right. */
+.conf-names {
+  line-height: 1.5;
+}
+
+/* Community (CV only) — nested sub-activities under a parent item. */
+.community-children {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding-left: 1rem;
+  border-left: 1px solid var(--resume-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.community-children li {
+  color: var(--resume-muted);
+  font-size: 0.95rem;
+}
+
+.community-year {
+  margin-right: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--resume-muted);
 }
 
 /* Interests */
