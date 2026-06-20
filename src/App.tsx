@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import './App.css'
-import { resume } from './data/resume'
-import type { ExperienceProject } from './data/resume'
+import { getResume } from './data/resume'
+import type { ExperienceProject, Locale } from './data/resume'
 import { Icon } from './components/icons'
 import { ThemeToggle } from './components/ThemeToggle'
+import { LanguageToggle } from './components/LanguageToggle'
 
 // Display text for a contact href: full URL for the web, bare address for email.
 function contactValue(href: string) {
@@ -123,7 +124,13 @@ function SectionHeading({ id, title }: { id: string; title: string }) {
   )
 }
 
-function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
+function App({
+  variant = 'home',
+  locale = 'en',
+}: {
+  variant?: 'home' | 'cv'
+  locale?: Locale
+}) {
   const {
     name,
     title,
@@ -142,7 +149,7 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
     teams,
     interests,
     projects,
-  } = resume
+  } = getResume(locale)
 
   const isCv = variant === 'cv'
 
@@ -160,6 +167,7 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
         <title>{isCv ? 'Chrono Lai — CV' : 'Chrono Lai — Resume'}</title>
       </Head>
       <div className="resume-topbar">
+        <LanguageToggle locale={locale} variant={variant} />
         <ThemeToggle />
       </div>
       <header className="resume-header">
