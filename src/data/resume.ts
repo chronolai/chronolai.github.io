@@ -148,12 +148,74 @@ export const resume: Resume = {
       href: 'https://cycraft.com',
       period: '2018/10 – Present',
       team: 'Frontend Development Dept.',
-      highlights: [
-        { text: 'XCockpit (MDR / IASM / EASM)', href: 'https://www.cycraft.com/xcockpit' },
-        { text: 'CyberTotal', href: 'https://www.cycraft.com/cybertotal' },
-        { text: 'ThreatWall', href: 'https://www.cycraft.com/threatwall' },
-        { text: 'UI Component Library' },
-        { text: 'Internal: Official Site, Leave System, Employee Check-in Bot' },
+      description:
+        'Frontend platform development for enterprise cybersecurity products, shared UI infrastructure, and internal business systems.',
+      projects: [
+        {
+          name: 'XCockpit (MDR / IASM / EASM)',
+          href: 'https://www.cycraft.com/xcockpit',
+          contributions: [
+            'Frontend development for enterprise cybersecurity platforms',
+            'Developed and maintained React-based application modules and workflows',
+            'Contributed to multiple generations of cybersecurity products',
+          ],
+        },
+        {
+          name: 'CyberTotal & ThreatWall',
+          contributions: [
+            'Frontend development for cybersecurity products',
+            'Developed user-facing workflows and data presentation interfaces',
+          ],
+        },
+        {
+          name: 'UI Component Library',
+          contributions: [
+            "Contributed to two generations of the company's shared UI component library used across multiple products",
+            'Developed reusable UI components and established a shared SCSS-based design system',
+            'Designed a Bootstrap-based styling architecture supporting React-Bootstrap and custom React components',
+            'Built a unified icon pipeline generating both React SVG components and web font assets from a single source',
+          ],
+        },
+        {
+          name: 'Official Website',
+          contributions: [
+            'Architected and developed the second-generation corporate website using Gatsby.js',
+            'Designed a Markdown-based content workflow enabling non-technical teams to update website content independently',
+            'Built GitLab CI/CD pipelines for automated build and deployment workflows',
+            'Supported packaging and AWS deployment for the third-generation WordPress-based corporate website',
+          ],
+        },
+        {
+          name: 'Leave Management System',
+          contributions: [
+            'Replaced a legacy ProcessMaker workflow with a custom in-house leave management platform',
+            'Developed a full-stack solution using Django, React, and OAuth integration',
+            'Implemented approval workflows and HR-related business processes',
+          ],
+        },
+        {
+          name: 'Internal Tools',
+          contributions: [
+            'Developed a Mattermost-based employee attendance system integrated with HR platforms',
+            'Automated attendance workflows and employee data synchronization across multiple workspaces',
+          ],
+        },
+      ],
+      techStack: [
+        'React',
+        'Redux',
+        'Redux-Saga',
+        'TypeScript',
+        'JavaScript',
+        'SCSS',
+        'Styled Components',
+        'React-Bootstrap',
+        'Gatsby.js',
+        'Django',
+        'Python',
+        'OAuth',
+        'GitLab CI/CD',
+        'AWS',
       ],
     },
     {
