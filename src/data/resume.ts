@@ -15,6 +15,13 @@ export interface Highlight {
   href?: string
 }
 
+// A product breakdown under an experience entry: name + contribution bullets.
+export interface ExperienceProject {
+  name: string
+  href?: string
+  contributions: string[]
+}
+
 export interface ExperienceItem {
   role: string
   company: string
@@ -22,7 +29,10 @@ export interface ExperienceItem {
   period: string
   location?: string
   team?: string // team / department within the company
+  description?: string // one-line summary shown above the project breakdown
   highlights?: Highlight[]
+  projects?: ExperienceProject[] // product breakdown; replaces highlights when present
+  techStack?: string[] // combined tech-stack chips shown below the projects
 }
 
 export interface EducationItem {
@@ -152,18 +162,31 @@ export const resume: Resume = {
       href: 'https://www.synology.com',
       period: '2014/10 – 2018/09',
       team: 'SD2 WAT',
-      highlights: [
+      description:
+        'Full-stack product development across React frontend and C/C++ backend services.',
+      projects: [
         {
-          text: 'Synology Moments',
+          name: 'Synology Moments',
           href: 'https://www.synology.com/en-global/dsm/feature/moments',
+          contributions: [
+            'Developed core frontend modules using React, Redux, and Redux-Saga',
+            'Implemented Lightbox, EXIF-based Map View, and 360° Panorama Viewer features',
+            'Built photo browsing experiences leveraging metadata and geolocation information',
+            'Developed backend services in C/C++ for photo management workflows',
+          ],
         },
         {
-          text: 'Video Station',
+          name: 'Video Station 2.0',
           href: 'https://www.synology.com/en-global/dsm/7.2/software_spec/video_station',
+          contributions: [
+            'Developed key features for the Video Station 2.0 redesign',
+            'Migrated video playback from Flash/SWF technology to native HTML5 video and HLS streaming',
+            'Implemented Chromecast integration, subtitle management, and HLS streaming workflows',
+            'Developed backend services in C/C++ for video processing and streaming features',
+          ],
         },
-        { text: 'internal: UI Request System' },
-        { text: 'tools: ExtExpress, SynoWeekly' },
       ],
+      techStack: ['React', 'Redux', 'Redux-Saga', 'Ext JS', 'JavaScript', 'HLS', 'Chromecast', 'C', 'C++'],
     },
   ],
   education: [

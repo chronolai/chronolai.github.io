@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Head } from 'vite-react-ssg'
 import './App.css'
 import { resume } from './data/resume'
+import type { ExperienceProject } from './data/resume'
 import { Icon } from './components/icons'
 import { ThemeToggle } from './components/ThemeToggle'
 
@@ -52,6 +53,39 @@ function Highlights({ items }: { items: { text: string; href?: string }[] }) {
         </li>
       ))}
     </ul>
+  )
+}
+
+// Product breakdown under an experience entry: name (+ trailing link icon) and
+// contribution bullets.
+function ExperienceProjects({ items }: { items: ExperienceProject[] }) {
+  return (
+    <div className="entry-projects">
+      {items.map((p) => (
+        <div key={p.name} className="entry-project">
+          <div className="entry-project-name">
+            {p.name}
+            {p.href ? (
+              <a
+                className="entry-link"
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${p.name} — external link`}
+                title="Visit website"
+              >
+                <Icon name="external-link" size={14} />
+              </a>
+            ) : null}
+          </div>
+          <ul className="entry-highlights">
+            {p.contributions.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -223,8 +257,20 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
                     ) : null}
                   </div>
                   {e.team ? <div className="entry-lab">{e.team}</div> : null}
-                  {e.highlights && e.highlights.length > 0 ? (
+                  {e.description ? <p className="entry-desc">{e.description}</p> : null}
+                  {e.projects && e.projects.length > 0 ? (
+                    <ExperienceProjects items={e.projects} />
+                  ) : e.highlights && e.highlights.length > 0 ? (
                     <Highlights items={e.highlights} />
+                  ) : null}
+                  {e.techStack && e.techStack.length > 0 ? (
+                    <ul className="tech-stack" aria-label="Tech stack">
+                      {e.techStack.map((t) => (
+                        <li key={t} className="tech-chip">
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
                   ) : null}
                 </div>
               </li>
