@@ -317,13 +317,31 @@
   color: var(--resume-muted);
 }
 
-/* Rich product breakdown under an experience entry. */
+/* Product breakdown under an experience entry — set apart from the surrounding
+   role/company/highlight text with a nested left rail and a small-caps label. */
+.entry-projects {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
 .entry-project {
-  margin-top: 0.75rem;
+  border-left: 2px solid var(--resume-border);
+  padding-left: 0.9rem;
 }
 
 .entry-project-name {
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--resume-accent);
+}
+
+.entry-project .entry-highlights {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
 }
 
 .tech-stack {
