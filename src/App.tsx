@@ -14,14 +14,21 @@ function contactValue(href: string) {
 }
 
 // Gold/silver/bronze class for 1st/2nd/3rd place. Parses the place number out of a
-// rank like 第一名 / 第二名 / 第 3 名 / 第2名 (Chinese or Arabic); 第十一名 etc. → none.
+// rank in either language: 第一名 / 第 3 名 / 第2名 (Chinese or Arabic) or an English
+// ordinal like "1st Place" / "2nd" / "3rd"; 第十一名 / "11th" etc. → none.
 function medalClass(rank?: string): string {
   if (!rank) return ''
-  if (rank.includes('特優')) return 'award-rank--gold' // 特優 ≑ 1st place
-  const m = rank.match(/第\s*([0-9一二三十]+)\s*名/)
-  if (!m) return ''
-  const n = m[1].trim()
-  const place = /^\d+$/.test(n) ? Number(n) : n === '一' ? 1 : n === '二' ? 2 : n === '三' ? 3 : 0
+  // 特優 / "Outstanding" ≑ 1st place.
+  if (rank.includes('特優') || /outstanding/i.test(rank)) return 'award-rank--gold'
+  const cn = rank.match(/第\s*([0-9一二三十]+)\s*名/)
+  const en = rank.match(/\b(\d+)(?:st|nd|rd|th)\b/i)
+  let place = 0
+  if (cn) {
+    const n = cn[1].trim()
+    place = /^\d+$/.test(n) ? Number(n) : n === '一' ? 1 : n === '二' ? 2 : n === '三' ? 3 : 0
+  } else if (en) {
+    place = Number(en[1])
+  }
   return place === 1
     ? 'award-rank--gold'
     : place === 2
