@@ -108,6 +108,7 @@ export interface Resume {
   conferences?: ConferenceItem[]
   community?: CommunityItem[]
   activities?: ActivityItem[]
+  teams?: ActivityItem[] // school / competition teams (reuses ActivityItem)
   interests?: InterestGroup[]
   projects?: ProjectItem[]
 }
@@ -220,7 +221,9 @@ export const resume: Resume = {
     { year: '2011/10', rank: '特優', title: '臺北科技大學資訊工程系實務專題競賽' },
     { year: '2011/07', rank: '第十一名', title: '台灣駭客年會 War Game', href: 'https://hitcon.org/2011/wargame/score_board.html' },
     { year: '2011', rank: '第三名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
+    { year: '2010/12', rank: '第五名', title: '2010 彰化師大羽球錦標賽 公開組 男子單打' },
     { year: '2010', rank: '第二名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
+    { year: '2009/12', rank: '第二名', title: '臺北科技大學九十八年校長盃 羽球甲組個人排名賽' },
     { year: '2009', rank: '第一名', title: '臺北科技大學 通識競賽 魔術方塊大賽' },
     { year: '2008', title: '臺北市畢業生市長獎' },
     { year: '2007/12', rank: '', title: '96學年度工業類學生技藝競賽（電腦修護職種）參賽證明' },
@@ -289,11 +292,31 @@ export const resume: Resume = {
       ],
     },
   ],
-  // TODO: replace these placeholders with the real class/club/team roles.
   activities: [
-    { period: 'TODO', role: '班級幹部 (TODO)', org: 'TODO' },
-    { period: 'TODO', role: '社團幹部 (TODO)', org: 'TODO' },
-    { period: 'TODO', role: '校隊 (TODO)', org: 'TODO' },
+    { period: '2013/09', role: '班代', org: '資工碩二' },
+    { period: '2012/09', role: '班代', org: '資工碩一' },
+    { period: '2012/02', role: '班代', org: '四資四' },
+    { period: '2011/09', role: '班代', org: '四資四' },
+    { period: '2011/02', role: '體育', org: '四資三' },
+    { period: '2007/02', role: '材料管理組', org: '資二仁' },
+    { period: '2007/02', role: '社長', org: '益智遊戲社' },
+    { period: '2006/09', role: '社員', org: '象棋社' },
+    { period: '2006/09', role: '資訊幹事', org: '資二仁' },
+    { period: '2006/09', role: '設備管理組', org: '資二仁' },
+    { period: '2006/02', role: '社員', org: '桌球社' },
+    { period: '2006/02', role: '安全管理組', org: '資一仁' },
+    { period: '2006/02', role: '資訊股長', org: '資一仁' },
+    { period: '2005/09', role: '康樂股長', org: '資一仁' },
+    { period: '2005/09', role: '材料管理組', org: '資一仁' },
+    { period: '2005/09', role: '社員', org: '網頁製作社' },
+  ],
+  teams: [
+    { period: '2012 – 2014', role: '隊員', org: '羽球隊' },
+    { period: '2008 – 2012', role: '隊員', org: '羽球隊' },
+    { period: '2005 – 2008', role: '選手', org: '技能競賽' },
+    { period: '2002 – 2005', role: '隊員', org: '田徑隊' },
+    { period: '2000 – 2002', role: '隊員', org: '毽子隊' },
+    { period: '1998 – 2000', role: '隊員', org: '羽球隊' },
   ],
   interests: [
     {

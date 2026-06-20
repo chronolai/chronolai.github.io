@@ -236,6 +236,11 @@
   font-size: 1.05rem;
 }
 
+/* Plain (non-officer) activity rows, e.g. 社員 — drop the bold. */
+.entry-title--plain {
+  font-weight: 400;
+}
+
 .entry-org {
   font-weight: 600;
   color: var(--resume-accent);

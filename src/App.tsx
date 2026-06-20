@@ -105,6 +105,7 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
     conferences,
     community,
     activities,
+    teams,
     interests,
     projects,
   } = resume
@@ -405,8 +406,30 @@ function App({ variant = 'home' }: { variant?: 'home' | 'cv' }) {
               <li key={`${a.role}-${i}`} className="entry entry--dated">
                 <span className="entry-meta">{a.period}</span>
                 <div className="entry-content">
-                  <span className="entry-title">
+                  <span
+                    className={`entry-title${
+                      a.role === '社員' || a.role.includes('管理組') ? ' entry-title--plain' : ''
+                    }`}
+                  >
                     {a.role} <span className="activity-org">· {a.org}</span>
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {isCv && teams && teams.length > 0 && (
+        <section className="resume-section" aria-labelledby="teams">
+          <SectionHeading id="teams" title="Teams" />
+          <ul className="entry-list">
+            {teams.map((t, i) => (
+              <li key={`${t.role}-${t.org}-${i}`} className="entry entry--dated">
+                <span className="entry-meta">{t.period}</span>
+                <div className="entry-content">
+                  <span className="entry-title">
+                    {t.role} <span className="activity-org">· {t.org}</span>
                   </span>
                 </div>
               </li>
