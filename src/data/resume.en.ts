@@ -139,7 +139,7 @@ export const resume: Resume = {
         name: 'Intelligent System Lab',
         href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
       },
-      highlights: [{ text: 'Research Topic: Static Code Analysis' }],
+      highlights: [{ text: 'Thesis: Static Code Analysis' }],
     },
     {
       degree: 'B.S. in Computer Science and Information Engineering',

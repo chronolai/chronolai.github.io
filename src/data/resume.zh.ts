@@ -139,7 +139,7 @@ export const resume: Resume = {
         name: '智慧型系統實驗室',
         href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
       },
-      highlights: [{ text: '研究主題：靜態程式碼分析' }],
+      highlights: [{ text: '論文：靜態程式碼分析' }],
     },
     {
       degree: '資訊工程學士',
