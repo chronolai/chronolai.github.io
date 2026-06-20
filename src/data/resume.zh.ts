@@ -1,16 +1,16 @@
-// Chinese resume content (copied from English for now; translate over time).
-// See types.ts for the shape and resume.ts for the per-locale selector.
+// Chinese resume content. See types.ts for the shape and resume.ts for the
+// per-locale selector.
 import type { Resume } from './types'
 
 export const resume: Resume = {
   name: 'Chrono Lai',
   title: 'Software Engineer',
-  location: 'Taiwan',
+  location: '台灣',
   gravatarHash: 'c0ffc65eca47c9d9315d2b91fc54bf98888d98587a09957047afe3e3d672d24b',
   // Shown as icons. `label` becomes the accessible label + hover tooltip.
   // Delete any you don't use; fill in the TODO handles.
   contacts: [
-    { label: 'Email', href: 'mailto:x941i6c04[at]gmail.com', icon: 'email' },
+    { label: '電子郵件', href: 'mailto:x941i6c04[at]gmail.com', icon: 'email' },
     { label: 'GitHub', href: 'https://github.com/chronolai', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chronolai/', icon: 'linkedin' },
     { label: 'X (Twitter)', href: 'https://x.com/x941i6c04', icon: 'x', hidden: true },
@@ -28,55 +28,55 @@ export const resume: Resume = {
       period: '2018/10 – Present',
       team: 'Frontend Development Dept.',
       description:
-        'Frontend platform development for enterprise cybersecurity products, shared UI infrastructure, and internal business systems.',
+        '為企業資安產品、共用 UI 基礎建設與內部商業系統進行前端平台開發。',
       projects: [
         {
           name: 'XCockpit (MDR / IASM / EASM)',
           href: 'https://www.cycraft.com/xcockpit',
           contributions: [
-            'Frontend development for enterprise cybersecurity platforms',
-            'Developed and maintained React-based application modules and workflows',
-            'Contributed to multiple generations of cybersecurity products',
+            '負責企業資安平台的前端開發',
+            '開發與維護以 React 為基礎的應用模組與操作流程',
+            '參與多個世代的資安產品開發',
           ],
         },
         {
           name: 'CyberTotal & ThreatWall',
           contributions: [
-            'Frontend development for cybersecurity products',
-            'Developed user-facing workflows and data presentation interfaces',
+            '負責資安產品的前端開發',
+            '開發面向使用者的操作流程與資料呈現介面',
           ],
         },
         {
           name: 'UI Component Library',
           contributions: [
-            "Contributed to two generations of the company's shared UI component library used across multiple products",
-            'Developed reusable UI components and established a shared SCSS-based design system',
-            'Designed a Bootstrap-based styling architecture supporting React-Bootstrap and custom React components',
-            'Built a unified icon pipeline generating both React SVG components and web font assets from a single source',
+            '參與公司兩個世代、跨多項產品使用的共用 UI 元件庫',
+            '開發可重用的 UI 元件，並建立以 SCSS 為基礎的共用設計系統',
+            '設計以 Bootstrap 為基礎的樣式架構，支援 React-Bootstrap 與自訂 React 元件',
+            '建立統一的 icon 產製流程，從單一來源同時產出 React SVG 元件與 web font 資源',
           ],
         },
         {
           name: 'Official Website',
           contributions: [
-            'Architected and developed the second-generation corporate website using Gatsby.js',
-            'Designed a Markdown-based content workflow enabling non-technical teams to update website content independently',
-            'Built GitLab CI/CD pipelines for automated build and deployment workflows',
-            'Supported packaging and AWS deployment for the third-generation WordPress-based corporate website',
+            '使用 Gatsby.js 規劃並開發第二代公司官網',
+            '設計以 Markdown 為基礎的內容流程，讓非技術團隊能自行更新網站內容',
+            '建置 GitLab CI/CD pipeline，自動化建置與部署流程',
+            '支援第三代以 WordPress 為基礎的公司官網之封裝與 AWS 部署',
           ],
         },
         {
           name: 'Leave Management System',
           contributions: [
-            'Replaced a legacy ProcessMaker workflow with a custom in-house leave management platform',
-            'Developed a full-stack solution using Django, React, and OAuth integration',
-            'Implemented approval workflows and HR-related business processes',
+            '以自建的請假管理平台取代既有的 ProcessMaker 流程',
+            '使用 Django、React 與 OAuth 整合開發全端解決方案',
+            '實作簽核流程與人資相關的商業流程',
           ],
         },
         {
           name: 'Internal Tools',
           contributions: [
-            'Developed a Mattermost-based employee attendance system integrated with HR platforms',
-            'Automated attendance workflows and employee data synchronization across multiple workspaces',
+            '開發整合人資平台、以 Mattermost 為基礎的員工出勤系統',
+            '自動化出勤流程與跨多個工作區的員工資料同步',
           ],
         },
       ],
@@ -104,26 +104,26 @@ export const resume: Resume = {
       period: '2014/10 – 2018/09',
       team: 'SD2 WAT',
       description:
-        'Full-stack product development across React frontend and C/C++ backend services.',
+        '橫跨 React 前端與 C/C++ 後端服務的全端產品開發。',
       projects: [
         {
           name: 'Synology Moments',
           href: 'https://www.synology.com/en-global/dsm/feature/moments',
           contributions: [
-            'Developed core frontend modules using React, Redux, and Redux-Saga',
-            'Implemented Lightbox, EXIF-based Map View, and 360° Panorama Viewer features',
-            'Built photo browsing experiences leveraging metadata and geolocation information',
-            'Developed backend services in C/C++ for photo management workflows',
+            '使用 React、Redux 與 Redux-Saga 開發核心前端模組',
+            '實作 Lightbox、基於 EXIF 的地圖檢視，以及 360° 全景檢視功能',
+            '運用中繼資料與地理位置資訊打造相片瀏覽體驗',
+            '以 C/C++ 開發相片管理流程的後端服務',
           ],
         },
         {
           name: 'Video Station 2.0',
           href: 'https://www.synology.com/en-global/dsm/7.2/software_spec/video_station',
           contributions: [
-            'Developed key features for the Video Station 2.0 redesign',
-            'Migrated video playback from Flash/SWF technology to native HTML5 video and HLS streaming',
-            'Implemented Chromecast integration, subtitle management, and HLS streaming workflows',
-            'Developed backend services in C/C++ for video processing and streaming features',
+            '參與 Video Station 2.0 改版的關鍵功能開發',
+            '將影片播放從 Flash/SWF 技術遷移至原生 HTML5 video 與 HLS 串流',
+            '實作 Chromecast 整合、字幕管理與 HLS 串流流程',
+            '以 C/C++ 開發影片處理與串流功能的後端服務',
           ],
         },
       ],
@@ -132,48 +132,48 @@ export const resume: Resume = {
   ],
   education: [
     {
-      degree: 'M.S. in Computer Science and Information Engineering',
-      school: 'National Taipei University of Technology',
+      degree: '資訊工程碩士',
+      school: '國立臺北科技大學',
       period: '2012 – 2014',
       lab: {
-        name: 'Intelligent System Lab',
+        name: '智慧型系統實驗室',
         href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
       },
-      highlights: [{ text: 'Research Topic: Static Code Analysis' }],
+      highlights: [{ text: '研究主題：靜態程式碼分析' }],
     },
     {
-      degree: 'B.S. in Computer Science and Information Engineering',
-      school: 'National Taipei University of Technology',
+      degree: '資訊工程學士',
+      school: '國立臺北科技大學',
       period: '2008 – 2012',
       lab: {
-        name: 'Embedded and Parallel Systems Lab',
+        name: '嵌入式與平行系統實驗室',
       },
       highlights: [
         {
-          text: 'Capstone Project: Android-based Remote Control Vehicle with Real-time Video Streaming',
+          text: '專題：基於 Android 的遠端遙控車與即時影像串流',
         },
       ],
     },
     {
-      degree: 'Dept. of Computer Science',
-      school: 'Taipei Municipal Songshan High School of Agriculture and Industry',
+      degree: '資訊科',
+      school: '臺北市立松山高級工農職業學校',
       period: '2005 – 2008',
       cvOnly: true,
     },
     {
-      degree: 'Junior High School',
-      school: 'Taipei Municipal Heping High School',
+      degree: '國民中學',
+      school: '臺北市立和平高級中學',
       period: '2002 – 2005',
       cvOnly: true,
     },
     {
-      degree: 'Elementary School',
-      school: 'Taipei Municipal Daan Elementary School',
+      degree: '國民小學',
+      school: '臺北市大安國民小學',
       period: '1996 – 2002',
       cvOnly: true,
     },
     {
-      degree: 'Kindergarten',
+      degree: '幼稚園',
       school: '內政部警政署警察機械修理廠附設幼稚園',
       period: '1995 – 1996',
       cvOnly: true,

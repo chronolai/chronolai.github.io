@@ -11,7 +11,7 @@ function buildDate(): string {
 function resumeUpdatedDate(): string {
   try {
     return (
-      execSync('git log -1 --format=%cd --date=format:%Y/%m/%d -- src/data/resume.ts', {
+      execSync('git log -1 --format=%cd --date=format:%Y/%m/%d -- src/data/', {
         encoding: 'utf8',
       }).trim() || buildDate()
     )
