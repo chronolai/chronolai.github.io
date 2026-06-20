@@ -306,9 +306,12 @@
   font-size: 0.95rem;
 }
 
+/* Summary sentence for an experience entry. Distinct from the small grey
+   `.entry-lab` team label above it: base text colour + more breathing room so it
+   reads as a lead sentence, not another muted label. */
 .entry-desc {
-  margin-top: 0.35rem !important;
-  color: var(--resume-muted);
+  margin-top: 0.55rem !important;
+  line-height: 1.55;
 }
 
 .entry-lab {

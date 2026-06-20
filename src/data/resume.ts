@@ -260,7 +260,7 @@ export const resume: Resume = {
         name: 'Intelligent System Lab',
         href: 'https://academic.ntut.edu.tw/jykuo/main/17662/17663/normalPost',
       },
-      highlights: [{ text: 'The Study of Static Code Analysis' }],
+      highlights: [{ text: 'Research Topic: Static Code Analysis' }],
     },
     {
       degree: 'B.S. in Computer Science and Information Engineering',
@@ -271,7 +271,7 @@ export const resume: Resume = {
       },
       highlights: [
         {
-          text: 'A Wireless Network-based Android Remote Control Car with Real-time Camera Video Supported',
+          text: 'Capstone Project: Android-based Remote Control Vehicle with Real-time Video Streaming',
         },
       ],
     },
